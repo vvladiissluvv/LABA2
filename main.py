@@ -48,15 +48,15 @@ command = input("Хотите вывести результаты на экра�
 if command.lower() == 'y':
     with open('statistics.json', 'r') as f:
         statistics = json.load(f)
-    filter = input("Введите расширения файлов через запятую (например .txt,.docx): ")
-    filter = [f.lower() for f in filter.split(',') if f]
-    for extension, data in statistics.items():
-        if not filter or extension in filter:
-            print("Расширение: {}".format(extension))
-            print("Количество файлов: {}".format(data['count']))
-            print("Занимаемая память: {}".format(get_file_size(data['size'])))
-            print("Количество папок: {}".format(len(data['folders'])))
-            print("Папки, в которых лежат файлы данного типа:")
-            for folder, count in sorted(data['folders'].items(), key=lambda x: x[1], reverse=True):
-                print("\t{} ({})".format(folder, count))
-            print()
+        filter = input("Введите расширения файлов через запятую (например .txt,.docx): ")
+        filter = [f.lower() for f in filter.split(',') if f]
+        for extension, data in statistics.items():
+            if not filter or extension in filter:
+                print("Расширение: {}".format(extension))
+                print("Количество файлов: {}".format(data['count']))
+                print("Занимаемая память: {}".format(get_file_size(data['size'])))
+                print("Количество папок: {}".format(len(data['folders'])))
+                print("Папки, в которых лежат файлы данного типа:")
+                for folder, count in sorted(data['folders'].items(), key=lambda x: x[1], reverse=True):
+                    print("\t{} ({})".format(folder, count))
+                print()
