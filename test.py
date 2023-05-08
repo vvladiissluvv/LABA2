@@ -1,4 +1,6 @@
 import os
+import json
+from random import randint
 
 
 def check_path(path:str) -> bool:
@@ -19,14 +21,55 @@ def exit():
         return 0
     else:
         start_work()
-#C:\test rec
+#/home/chikoni/Загрузки
+
 def obhodfile(path, level=1):
-        #print('Level=', level, 'Con: ', os.listdir(path))
+        json_data = {key: os.path.getsize(path + '/' + key) for key in os.listdir(path)}
+
+        if not os.path.exists("./stat/"):
+            os.mkdir("./stat/")
+
+        with open("./stat/{}.json".format(randint(0, 100)), "w", encoding='utf8') as file:
+            json.dump(json_data, file, indent=4, ensure_ascii=False)
+
         for i in os.listdir(path):
-            if os.path.isdir(path + '\\' + i):
-                print(path + '\\' + i)
-                print(os.listdir(path + '\\' + i))
-                obhodfile(path + '\\' + i, level + 1)
+            if os.path.isdir(path + '/' + i):
+                obhodfile(path + '/' + i, level + 1)
+
+        join_file()
+
+def join_file():
+        curent_file = []
+        for fl in os.listdir(f'./stat/'):
+            with open('./stat/{}'.format(fl), encoding='utf8') as f:
+                jsonText = json.load(f)
+                for i in jsonText:
+                    curent_file.append(i)
+
+        if not os.path.exists("./finish/"):
+            os.mkdir("./finish/")
+
+        with open("./finish/cur_file.json", "w", encoding='utf8') as fh:
+            json.dump(curent_file, fh, indent=4, ensure_ascii=False)
+
+
+def get_stat():
+    print("""[MENU STATISTICKS]
+        1. Всем типам файлов
+        2. Конкретный тип файлов
+        3. Всем папкам
+        4. Конкретной папке
+        """)
+    choose_stat = input("Введите номер необходимой функции статистики: ")
+    if choose_stat == "1":
+        pass
+    elif choose_stat == "2":
+        pass
+    elif choose_stat == "3":
+        pass
+    elif choose_stat == "4":
+        print([])
+    exit()
 
 def start_work():
     print('''MENU
@@ -39,15 +82,30 @@ def start_work():
 
     if ansver == "1":
         fpath = input("Введите путь до папки: ")
-        qq = check_path(fpath)
-        obhodfile(qq)
+        # qq = check_path(fpath)
+        obhodfile(fpath)
         exit()
         #Написать функцию обхода заданной папки (Получает на вход path, рекурсивно проходит по нему и сохраняет информацию)
-        #Написать 
-        
-    
+        #Написать
+
+
     elif ansver == "2":
-        print("Не работает!")
+        print("""[MENU STATISTICKS]
+        1. Всем типам файлов
+        2. Конкретный тип файлов
+        3. Всем папкам
+        4. Конкретной папке
+        """)
+        choose_stat = input("Введите номер необходимой функции статистики: ")
+
+        if choose_stat == "1":
+            pass
+        elif choose_stat == "2":
+            pass
+        elif choose_stat == "3":
+            pass
+        elif choose_stat == "4":
+            print([])
         exit()
 
     elif ansver == "3":
@@ -55,5 +113,6 @@ def start_work():
         exit()
 
 
-start_work()
+# start_work()
+obhodfile("/home/chikoni/Загрузки")
 
