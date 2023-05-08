@@ -19,6 +19,14 @@ def exit():
         return 0
     else:
         start_work()
+#C:\test rec
+def obhodfile(path, level=1):
+        #print('Level=', level, 'Con: ', os.listdir(path))
+        for i in os.listdir(path):
+            if os.path.isdir(path + '\\' + i):
+                print(path + '\\' + i)
+                print(os.listdir(path + '\\' + i))
+                obhodfile(path + '\\' + i, level + 1)
 
 def afafefeawfse():
     pass
@@ -35,6 +43,7 @@ def start_work():
     if ansver == "1":
         fpath = input("Введите путь до папки: ")
         qq = check_path(fpath)
+        obhodfile(qq)
         exit()
         #Написать функцию обхода заданной папки (Получает на вход path, рекурсивно проходит по нему и сохраняет информацию)
         #Написать 
@@ -49,6 +58,5 @@ def start_work():
         exit()
 
 
-# start_work()
-with open("./idi_nahyi.txt", "w") as f:
-    f.write("Соси хуй!!!! ХАВАВХАВХАХВАХВАХВХАВХАВХАВХ")
+start_work()
+
