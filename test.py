@@ -20,6 +20,9 @@ def exit():
     else:
         start_work()
 
+def afafefeawfse():
+    pass
+
 def start_work():
     print('''MENU
     1. Сбор статистики из определённой папки
